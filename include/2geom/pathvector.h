@@ -34,10 +34,9 @@
 #ifndef LIB2GEOM_SEEN_PATHVECTOR_H
 #define LIB2GEOM_SEEN_PATHVECTOR_H
 
+#include <algorithm>
 #include <optional>
 #include <boost/concept/requires.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/range/algorithm/equal.hpp>
 #include <2geom/forward.h>
 #include <2geom/path.h>
 #include <2geom/transforms.h>
@@ -259,7 +258,7 @@ public:
     }
 
     bool operator==(PathVector const &other) const {
-        return boost::range::equal(_data, other._data);
+        return std::equal(_data.cbegin(), _data.cend(), other._data.cbegin(), other._data.cend());
     }
 
     void snapEnds(Coord precision = EPSILON);
